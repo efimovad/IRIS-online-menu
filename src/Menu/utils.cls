@@ -1,9 +1,9 @@
-Class Meny.Utils
+Class Dish.Utils
 {
 
-ClassMethod SaveDish(Obj As Menu.Dishes) As %Status
+ClassMethod SaveDish(Obj As Dish.Dishes) As %Status
 {
-    set obj = ##class(Menu.Dishes).%New()
+    set obj = ##class(Dish.Dishes).%New()
     set obj.Name = Obj.Name
     set obj.Description = Obj.Description
     set obj.CafeID = Obj.CafeID
@@ -14,34 +14,37 @@ ClassMethod SaveDish(Obj As Menu.Dishes) As %Status
 
 ClassMethod DeleteDish(ID As %Integer) As %Status
 {
-    set result = ##class(Menu.Dishes).%DeleteId(ID)
+    set result = ##class(Dish.Dishes).%DeleteId(ID)
     Return result
 }
 
-ClassMethod GetCafe(ID As %Integer) As Menu.Dishes
+ClassMethod GetDish(ID As %Integer) As Dish.Dishes
 {
-    set obj = ##class(Menu.Dishes).%OpenId(ID)
-    #; write "name="
-    #; write obj.Name
-    #; write "&address="
-    #; write obj.Address
-    #; write "&phone="
-    #; write obj.Phone
-    #; write "&minPrice="
-    #; write obj.MinPrice
+    set obj = ##class(Dish.Dishes).%OpenId(ID)
     Return obj
 }
 
-ClassMethod Write(Obj As Menu.Dishes)
+ClassMethod GetDishList(CafeId As %Integer) As %String
 {
-    write "name="
-    write Obj.Name
-    write "&description="
-    write Obj.Description
-    write "&cafeId="
-    write Obj.CafeID
-    write "&price="
-    write Obj.Price
+    set data = []
+    &sql(
+        DECLARE MyCursor CURSOR FOR
+        SELECT ID, CafeID, Description, Name, Price
+        INTO :ID, :CafeID, :Description, :Name, :Price
+        FROM Cafe.Dishes
+        WHERE CafeID = CafeId
+    )
+    
+    &sql(OPEN MyCursor)   
+    FOR { 
+        &sql(FETCH MyCursor)
+        if (SQLCODE) quit
+        set obj = {"id": (ID), "cafeID": (CafeID), "name": (Name), "description": (Description), "price": (Price)}
+        do data.%Push(obj)
+   }
+   &sql(CLOSE MyCursor)
+   return data
+   quit
 }
 
 }

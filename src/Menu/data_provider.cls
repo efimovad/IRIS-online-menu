@@ -1,4 +1,4 @@
-Class Menu.DataProvider Extends %CSP.Page
+Class Dish.DataProvider Extends %CSP.Page
 {
 
 ClassMethod OnPage() As %Status

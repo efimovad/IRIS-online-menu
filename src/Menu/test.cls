@@ -1,4 +1,4 @@
-Class Cafe.MyTest Extends %CSP.Page
+Class Dish.MyTest Extends %CSP.Page
 {
 
 ClassMethod OnPage() As %Status
@@ -28,12 +28,12 @@ var ui_template = {
  width: "400",
  elements:[
    {view: "text", name: "name", label: "Name"},
-   {view: "text", name: "address", label: "Address"},
-   {view: "text", name: "phone", label: "Phone"},
-   {view: "text", name: "minPrice", label: "MinPrice", type: 'number'},
+   {view: "text", name: "description", label: "Description"},
+   {view: "text", name: "cafeId", label: "CafeId", type: 'number'},
+   {view: "text", name: "price", label: "Price", type: 'number'},
    { view:"button",  value:"Submit", id:"btn", click:function(){
      var values = this.getFormView().getValues();
-     webix.ajax().post("/cafe", values, submitResult);
+     webix.ajax().post("/dish", values, submitResult);
    }}
  ]};
  

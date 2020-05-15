@@ -1,13 +1,13 @@
-Class Menu.Dishes Extends %Persistent
+Class Dish.Dishes Extends %Persistent
 {
 
 Property Name As %String;
 
-Property CafeID As %Integer;
-
 Property Description As %String;
 
 Property Price As %Integer;
+
+Property Cafe As Cafe.Places;
 
 Storage Default
 {
@@ -19,20 +19,20 @@ Storage Default
 <Value>Name</Value>
 </Value>
 <Value name="3">
-<Value>CafeID</Value>
-</Value>
-<Value name="4">
 <Value>Description</Value>
 </Value>
-<Value name="5">
+<Value name="4">
 <Value>Price</Value>
 </Value>
+<Value name="5">
+<Value>Cafe</Value>
+</Value>
 </Data>
-<DataLocation>^Menu.DishesD</DataLocation>
+<DataLocation>^Dish.DishesD</DataLocation>
 <DefaultData>DishesDefaultData</DefaultData>
-<IdLocation>^Menu.DishesD</IdLocation>
-<IndexLocation>^Menu.DishesI</IndexLocation>
-<StreamLocation>^Menu.DishesS</StreamLocation>
+<IdLocation>^Dish.DishesD</IdLocation>
+<IndexLocation>^Dish.DishesI</IndexLocation>
+<StreamLocation>^Dish.DishesS</StreamLocation>
 <Type>%Storage.Persistent</Type>
 }
 

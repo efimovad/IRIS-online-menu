@@ -21,27 +21,29 @@ ClassMethod DeleteCafe(ID As %Integer) As %Status
 ClassMethod GetCafe(ID As %Integer) As Cafe.Places
 {
     set obj = ##class(Cafe.Places).%OpenId(ID)
-    write "name="
-    write obj.Name
-    write "&address="
-    write obj.Address
-    write "&phone="
-    write obj.Phone
-    write "&minPrice="
-    write obj.MinPrice
     Return obj
 }
 
-ClassMethod Write(Obj As Cafe.Places)
+ClassMethod GetCafeList() As %String
 {
-    write "name="
-    write Obj.Name
-    write "&address="
-    write Obj.Address
-    write "&phone="
-    write Obj.Phone
-    write "&minPrice="
-    write Obj.MinPrice
+    set data = []
+    &sql(
+        DECLARE MyCursor CURSOR FOR
+        SELECT ID, Name, Address, Phone, MinPrice
+        INTO :ID, :Name, :Address, :Phone, :MinPrice
+        FROM Cafe.Places
+    )
+    
+    &sql(OPEN MyCursor)   
+    FOR { 
+        &sql(FETCH MyCursor)
+        if (SQLCODE) quit
+        set obj = {"id": (ID), "name": (Name), "address": (Address), "phone": (Phone), "minPrice": (MinPrice)}
+        do data.%Push(obj)
+   }
+   &sql(CLOSE MyCursor)
+   return data
+   quit
 }
 
 }
