@@ -4,8 +4,8 @@ Class Dish.Api Extends %CSP.REST
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-    <Route Url="/" Method="POST" Call="SaveDish"/>
-    <Route Url="/" Method="DELETE" Call="DeleteDish"/>
+    <Route Url="/save" Method="POST" Call="SaveDish"/>
+    <Route Url="/delete" Method="DELETE" Call="DeleteDish"/>
     <Route Url="/" Method="GET" Call="GetDish"/>
     <Route Url="/list" Method="GET" Call="GetDishList"/>
    </Routes>
@@ -16,12 +16,10 @@ ClassMethod SaveDish() As %Status
    set obj = ##class(Dish.Dishes).%New()
    set obj.Name = %request.Get("name")
    set obj.Description = %request.Get("description")
-   
    set CafeId = %request.Get("cafeId")
-   set obj.CafeSetObjectId(CafeId)
-
+   do obj.CafeSetObjectId(CafeId)
    set obj.Price = %request.Get("price")
-   set result = ##class(Dish.Utils).SaveDish(obj)
+   set result = obj.%Save()
    if $$$ISERR(result) {
        write result
    }
@@ -65,6 +63,8 @@ ClassMethod GetDish() As %Status
 ClassMethod GetDishList() As %Status
 {
     set id = %request.Get("id")
+    #; write "id="_id
+    #; return $$$OK
     try {
         set list = ##class(Dish.Utils).GetDishList(id)
         write list.%ToJSON()

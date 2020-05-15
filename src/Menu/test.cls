@@ -33,7 +33,7 @@ var ui_template = {
    {view: "text", name: "price", label: "Price", type: 'number'},
    { view:"button",  value:"Submit", id:"btn", click:function(){
      var values = this.getFormView().getValues();
-     webix.ajax().post("/dish", values, submitResult);
+     webix.ajax().post("/dish/save", values, submitResult);
    }}
  ]};
  

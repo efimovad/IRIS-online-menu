@@ -9,6 +9,8 @@ Property Price As %Integer;
 
 Property Cafe As Cafe.Places;
 
+Index Cafe On Cafe;
+
 Storage Default
 {
 <Data name="DishesDefaultData">

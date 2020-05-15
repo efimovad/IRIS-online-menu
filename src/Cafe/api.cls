@@ -4,8 +4,8 @@ Class Cafe.Api Extends %CSP.REST
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-    <Route Url="/" Method="POST" Call="SaveCafe"/>
-    <Route Url="/" Method="DELETE" Call="DeleteCafe"/>
+    <Route Url="/save" Method="POST" Call="SaveCafe"/>
+    <Route Url="/delete" Method="DELETE" Call="DeleteCafe"/>
     <Route Url="/" Method="GET" Call="GetCafe"/>
     <Route Url="/list" Method="GET" Call="GetCafeList"/>
     <Route Url="/test" Method="GET" Call="Test"/>
