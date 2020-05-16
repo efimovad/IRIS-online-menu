@@ -3,8 +3,6 @@ Class Order.Orders Extends %Persistent
 
 Property Address As %String;
 
-Property Dishes As list Of Dish.Dishes;
-
 Property Cafe As Cafe.Places;
 
 Property Status As %String;
@@ -31,6 +29,9 @@ Storage Default
 </Value>
 <Value name="6">
 <Value>Cafe</Value>
+</Value>
+<Value name="7">
+<Value>Status</Value>
 </Value>
 </Data>
 <DataLocation>^Order.OrdersD</DataLocation>

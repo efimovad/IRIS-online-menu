@@ -6,7 +6,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Routes>
     <Route Url="/save" Method="POST" Call="SaveDish"/>
     <Route Url="/delete" Method="DELETE" Call="DeleteDish"/>
-    <Route Url="/" Method="GET" Call="GetDish"/>
+    <Route Url="/get" Method="GET" Call="GetDish"/>
     <Route Url="/list" Method="GET" Call="GetDishList"/>
    </Routes>
 }
