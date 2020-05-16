@@ -51,7 +51,6 @@ ClassMethod GetDish() As %Status
         set obj."name" = dish.Name
 	    set obj."description" = dish.Description
         set obj."price" = dish.Price
-        set obj."cafeId" = dish.CafeID
         set source = obj.%ToJSON()
 	    write source
         Return $$$OK
