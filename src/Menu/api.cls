@@ -14,11 +14,20 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 ClassMethod SaveDish() As %Status
 {
    set obj = ##class(Dish.Dishes).%New()
+
    set obj.Name = %request.Get("name")
+   set x = obj.NameIsValid(obj.Name)
+
    set obj.Description = %request.Get("description")
+   set x = obj.DescriptionIsValid(obj.Description)
+
    set CafeId = %request.Get("cafeId")
    do obj.CafeSetObjectId(CafeId)
+   set x = obj.CafeIsValid(obj.Cafe)
+   
    set obj.Price = %request.Get("price")
+   set x = obj.PriceIsValid(obj.Price)
+
    set result = obj.%Save()
    if $$$ISERR(result) {
        write result

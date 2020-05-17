@@ -4,10 +4,19 @@ Class Cafe.Utils
 ClassMethod SaveCafe(GoodsObj As Cafe.Places) As %Status
 {
     set obj = ##class(Cafe.Places).%New()
+    
     set obj.Name = GoodsObj.Name
+    set x = obj.NameIsValid(obj.Name)
+
     set obj.Address = GoodsObj.Address
+    set x = obj.AddressIsValid(obj.Address)
+    
     set obj.Phone = GoodsObj.Phone
+    set x = obj.PhoneIsValid(obj.Phone)
+
     set obj.MinPrice = GoodsObj.MinPrice
+    set x = obj.MinPriceIsValid(obj.MinPrice)
+    
     set result = obj.%Save()
     Return result
 }

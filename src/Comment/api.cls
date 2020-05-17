@@ -21,10 +21,14 @@ ClassMethod SaveComment() As %Status
     set obj = ##class(Comment.Comments).%New()
 
     set obj.Text = %request.Get("text")
+    set x = obj.TextIsValid(obj.Text)
+
     set obj.Grade = %request.Get("grade")
+    set x = obj.GradeIsValid(obj.Grade)
 
     set CafeId = %request.Get("cafeId")
     do obj.CafeSetObjectId(CafeId)
+    set x = obj.CafeIsValid(obj.Cafe)
     
     set result = obj.%Save()
     if $$$ISERR(result) {

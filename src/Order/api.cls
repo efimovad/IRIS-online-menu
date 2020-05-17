@@ -28,6 +28,7 @@ ClassMethod CreateOrder() As %Status
 
     set CafeId = %request.Get("cafeId")
     do obj.CafeSetObjectId(CafeId)
+    set x = obj.CafeIsValid(obj.Cafe)
     
     set result = obj.%Save()
 
